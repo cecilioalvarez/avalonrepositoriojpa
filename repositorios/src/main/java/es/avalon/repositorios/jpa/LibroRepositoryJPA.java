@@ -76,5 +76,4 @@ public class LibroRepositoryJPA implements LibroRepository {
 		t.commit();
 	}
 
-	//// 
 }
