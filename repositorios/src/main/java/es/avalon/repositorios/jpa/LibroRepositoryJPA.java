@@ -26,14 +26,26 @@ public class LibroRepositoryJPA implements LibroRepository {
 
 	@Override
 	public Libro buscarPorISBN(String isbn) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("UnidadBiblioteca");
+		EntityManager em = emf.createEntityManager();
+		
+		Libro libro = em.find(Libro.class, isbn);
+		
+		
+		return libro;
 	}
 
 	@Override
 	public Libro buscarPorTitulo(String titulo) {
-		// TODO Auto-generated method stub
-		return null;
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("UnidadBiblioteca");
+		EntityManager em = emf.createEntityManager();
+		
+		TypedQuery<Libro> consulta = em.createQuery("select l from Libro l where l.titulo=:titulo", Libro.class);
+		consulta.setParameter("titulo", titulo);
+		Libro libro = consulta.getSingleResult();
+
+		return libro;
 	}
 
 	@Override
