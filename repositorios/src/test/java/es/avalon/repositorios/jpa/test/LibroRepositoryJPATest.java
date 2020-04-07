@@ -2,9 +2,11 @@ package es.avalon.repositorios.jpa.test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.greaterThanOrEqualTo;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+import es.avalon.dominio.Libro;
 import es.avalon.repositorios.LibroRepository;
 import es.avalon.repositorios.jpa.LibroRepositoryJPA;
 
@@ -22,6 +24,31 @@ public class LibroRepositoryJPATest {
 	
 		LibroRepository mirepositorio= new LibroRepositoryJPA();	
 		assertThat(mirepositorio.buscarTodos().size(),greaterThanOrEqualTo(4));
+		
+		
+		
+	}
+	
+	@Test
+	public void test_buscar_por_isbn() {
+	
+		LibroRepository mirepositorio= new LibroRepositoryJPA();	
+		Libro libro=mirepositorio.buscarPorISBN("1AB");
+		assertEquals("1AB", libro.getIsbn());
+		assertEquals("cecilio", libro.getAutor());
+		
+		
+		
+	}
+
+	@Test
+	public void test_buscar_por_titulo() {
+	
+		LibroRepository mirepositorio= new LibroRepositoryJPA();	
+		Libro libro=mirepositorio.buscarPorTitulo("Java");
+		assertEquals("Java", libro.getTitulo());
+		assertEquals("1AB", libro.getIsbn());
+		assertEquals("cecilio", libro.getAutor());
 		
 		
 		
