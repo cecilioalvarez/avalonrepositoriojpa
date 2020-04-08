@@ -12,7 +12,7 @@ import es.avalon.repositorios.LibroRepository;
 
 public class LibroRepositoryJPA implements LibroRepository {
 
-	@Override
+	
 	public List<Libro> buscarTodos() {
 
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("UnidadBiblioteca");
@@ -24,7 +24,7 @@ public class LibroRepositoryJPA implements LibroRepository {
 		return lista;
 	}
 
-	@Override
+	
 	public Libro buscarPorISBN(String isbn) {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("UnidadBiblioteca");
 		EntityManager em = emf.createEntityManager();
@@ -32,7 +32,7 @@ public class LibroRepositoryJPA implements LibroRepository {
 		return em.find(Libro.class, isbn);
 	}
 
-	@Override
+	
 	public Libro buscarPorTitulo(String titulo) {
 		
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("UnidadBiblioteca");
@@ -44,19 +44,19 @@ public class LibroRepositoryJPA implements LibroRepository {
 		return libro;
 	}
 
-	@Override
+	
 	public void insertar(Libro libro) {
 		// TODO Auto-generated method stub
 
 	}
 
-	@Override
+
 	public void salvar(Libro libro) {
 		// TODO Auto-generated method stub
 
 	}
 
-	@Override
+	
 	public void borrar(Libro libro) {
 		// TODO Auto-generated method stub
 
