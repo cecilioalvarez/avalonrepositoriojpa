@@ -72,7 +72,7 @@ public class LibroRepositoryJPA implements LibroRepository {
 		EntityTransaction et = em.getTransaction();
 		
 		et.begin();
-		Libro libroBorrar = em.find(Libro.class, "java");
+		Libro libroBorrar = em.find(Libro.class, libro.getIsbn());
 		em.remove(libroBorrar);
 		et.commit();
 		

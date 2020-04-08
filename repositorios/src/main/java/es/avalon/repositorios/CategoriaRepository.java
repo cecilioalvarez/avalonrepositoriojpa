@@ -4,6 +4,6 @@ import es.avalon.dominio.Categoria;
 
 public interface CategoriaRepository {
 	
-	Categoria buscarPotNombre(String nombre);
+	Categoria buscarPorNombre(String nombre);
 
 }
