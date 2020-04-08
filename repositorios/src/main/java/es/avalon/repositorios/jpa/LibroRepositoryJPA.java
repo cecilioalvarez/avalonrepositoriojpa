@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
@@ -11,6 +12,15 @@ import es.avalon.dominio.Libro;
 import es.avalon.repositorios.LibroRepository;
 
 public class LibroRepositoryJPA implements LibroRepository {
+	
+	EntityManagerFactory emf;
+	EntityManager em;
+	
+	public LibroRepositoryJPA() {
+		
+		emf=Persistence.createEntityManagerFactory("UnidadBiblioteca");
+		em=emf.createEntityManager();
+	}
 
 	@Override
 	public List<Libro> buscarTodos() {
@@ -46,19 +56,33 @@ public class LibroRepositoryJPA implements LibroRepository {
 
 	@Override
 	public void insertar(Libro libro) {
-		// TODO Auto-generated method stub
+		
+		EntityTransaction et=em.getTransaction();
+		et.begin();
+		em.persist(libro);
+		et.commit();
 
 	}
 
 	@Override
 	public void salvar(Libro libro) {
-		// TODO Auto-generated method stub
+		
+		EntityTransaction et=em.getTransaction();
+		et.begin();
+		em.merge(libro);
+		et.commit();
 
 	}
 
 	@Override
 	public void borrar(Libro libro) {
-		// TODO Auto-generated method stub
+		
+		EntityTransaction et=em.getTransaction();
+		et.begin();
+		Libro libroBorrar=em.merge(libro);
+		em.remove(libro);
+		et.commit();
+
 
 	}
 
