@@ -4,6 +4,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 import org.junit.Test;
 
@@ -47,6 +48,17 @@ public class LibroRepositoryJPATest {
 		assertEquals("html", libro.getTitulo());
 		assertEquals("gema", libro.getAutor());
 		assertEquals(8, libro.getPrecio());
+		
+	}
+	
+	@Test
+	public void test_borrar_libro() {
+//		LibroRepository mirepositorio= new LibroRepositoryJPA();
+//		Libro libro = new Libro("1AB");
+//		
+//		mirepositorio.borrar(libro);
+//		
+//		assertNull(libro);
 		
 
 	}
