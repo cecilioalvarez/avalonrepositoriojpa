@@ -52,5 +52,16 @@ public class LibroRepositoryJPATest {
 		
 		
 	}
+	
+	@Test
+	public void test_borrar_libro() {
+	
+		/*
+		LibroRepository mirepositorio= new LibroRepositoryJPA();	
+		Libro libro=new Libro("1AB");
+		mirepositorio.borrar(libro);
+		*/
+		
+	}
 
 }
