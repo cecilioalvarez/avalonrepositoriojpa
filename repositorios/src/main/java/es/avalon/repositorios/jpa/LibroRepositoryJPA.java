@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
@@ -12,54 +13,55 @@ import es.avalon.repositorios.LibroRepository;
 
 public class LibroRepositoryJPA implements LibroRepository {
 
-	@Override
+	EntityManagerFactory emf;
+	EntityManager em;
+
+	public LibroRepositoryJPA() {
+
+		emf = Persistence.createEntityManagerFactory("UnidadBiblioteca");
+		em=emf.createEntityManager();
+	}
+	
 	public List<Libro> buscarTodos() {
 
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("UnidadBiblioteca");
-		EntityManager em = emf.createEntityManager();
 		TypedQuery<Libro> consulta = em.createQuery("select l from Libro l", Libro.class);
-
-		List<Libro> lista = consulta.getResultList();
-
-		return lista;
+		return consulta.getResultList();		
 	}
 
-	@Override
 	public Libro buscarPorISBN(String isbn) {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("UnidadBiblioteca");
-		EntityManager em = emf.createEntityManager();
-
-		return em.find(Libro.class, isbn);
+		 return em.find(Libro.class, isbn);
 	}
-
-	@Override
+	
 	public Libro buscarPorTitulo(String titulo) {
-		
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("UnidadBiblioteca");
-		EntityManager em = emf.createEntityManager();
+
 		TypedQuery<Libro> consulta = em.createQuery("select l from Libro l where l.titulo=:titulo", Libro.class);
 		consulta.setParameter("titulo", titulo);
-		Libro libro = consulta.getSingleResult();
-
-		return libro;
+		return consulta.getSingleResult();
 	}
-
-	@Override
+	
 	public void insertar(Libro libro) {
-		// TODO Auto-generated method stub
-
+		EntityTransaction et = em.getTransaction();
+		et.begin();
+		em.persist(libro);
+		et.commit();
 	}
-
-	@Override
+	
 	public void salvar(Libro libro) {
-		// TODO Auto-generated method stub
+		
+		EntityTransaction et = em.getTransaction();
+		et.begin();
+		em.merge(libro);
+		et.commit();
 
 	}
-
-	@Override
+	
 	public void borrar(Libro libro) {
-		// TODO Auto-generated method stub
 
+		EntityTransaction et = em.getTransaction();
+		et.begin();
+		Libro libroBorrar = em.merge(libro);
+		em.remove(libroBorrar);
+		et.commit();
 	}
 
 }
