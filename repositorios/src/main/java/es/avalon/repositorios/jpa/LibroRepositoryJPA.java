@@ -48,10 +48,17 @@ public class LibroRepositoryJPA implements LibroRepository {
 	
 	public void salvar(Libro libro) {
 		
-		EntityTransaction et = em.getTransaction();
-		et.begin();
-		em.merge(libro);
-		et.commit();
+		try {
+			EntityTransaction et = em.getTransaction();
+			et.begin();
+			em.merge(libro);
+			et.commit();
+		} catch (Exception e) {
+			
+			if(em!=null) {
+				em.close();
+			}
+		}
 
 	}
 	
