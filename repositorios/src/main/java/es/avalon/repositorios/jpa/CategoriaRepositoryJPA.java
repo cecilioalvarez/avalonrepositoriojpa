@@ -9,15 +9,20 @@ import es.avalon.repositorios.CategoriaRepository;
 
 public class CategoriaRepositoryJPA implements CategoriaRepository{
 
+
 	EntityManagerFactory emf;
 	EntityManager em;
+
 	public CategoriaRepositoryJPA() {
+
 		emf = Persistence.createEntityManagerFactory("UnidadBiblioteca");
-		em = emf.createEntityManager();
+		em=emf.createEntityManager();
 	}
+	
 	@Override
 	public Categoria buscarPorNombre(String nombre) {
 		
 		return em.find(Categoria.class, nombre);
 	}
+
 }
