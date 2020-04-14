@@ -17,5 +17,8 @@ public interface LibroRepository {
 	void salvar(Libro libro);
 
 	void borrar(Libro libro);
+	
+	List<Libro> ordenarPorTitulo();
+	List<Libro> ordenarPorAutor();
 
 }

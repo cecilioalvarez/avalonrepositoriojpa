@@ -77,4 +77,18 @@ public class LibroRepositoryJPA implements LibroRepository {
 		et.commit();
 		
 	}
+
+	@Override
+	public List<Libro> ordenarPorTitulo() {
+		TypedQuery<Libro> consulta = em.createQuery("select l from Libro l order by l.titulo ", Libro.class);
+
+		return consulta.getResultList();
+	}
+
+	@Override
+	public List<Libro> ordenarPorAutor() {
+		TypedQuery<Libro> consulta = em.createQuery("select l from Libro l order by l.autor ", Libro.class);
+
+		return consulta.getResultList();
+	}
 }

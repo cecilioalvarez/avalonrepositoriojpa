@@ -198,6 +198,20 @@ public class LibroRepositoryJDBC implements LibroRepository {
 		}
 
 	}
+
+
+	@Override
+	public List<Libro> ordenarPorTitulo() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public List<Libro> ordenarPorAutor() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 	
