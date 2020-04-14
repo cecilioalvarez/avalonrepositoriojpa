@@ -21,5 +21,7 @@ public interface LibroRepository {
 	List<Libro> ordenarPorTitulo();
 	
 	List<Libro> ordenarPorPrecio();
+	
+	List<Libro> ordenarPorCategoria();
 
 }

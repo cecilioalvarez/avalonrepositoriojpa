@@ -75,4 +75,8 @@ public class LibroRepositoryJPA implements LibroRepository {
 		return consulta.getResultList();
 	}
 
+	public List<Libro> ordenarPorCategoria() {
+		TypedQuery<Libro> consulta = entityManager.createQuery("select l from Libro l order by l.categoria", Libro.class);
+		return consulta.getResultList();
+	}
 }
