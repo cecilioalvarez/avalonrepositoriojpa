@@ -27,6 +27,20 @@ public class LibroRepositoryJPA implements LibroRepository {
 
 		return consulta.getResultList();
 	}
+	
+	public List<Libro> buscarTodosOrdenadosPorTitulo() {
+
+		TypedQuery<Libro> consulta = em.createQuery("select l from Libro l order by l.titulo", Libro.class);
+
+		return consulta.getResultList();
+	}
+	
+	public List<Libro> buscarTodosOrdenadosPorAutor() {
+
+		TypedQuery<Libro> consulta = em.createQuery("select l from Libro l order by l.autor", Libro.class);
+
+		return consulta.getResultList();
+	}
 
 	public Libro buscarPorISBN(String isbn) {
 		return em.find(Libro.class, isbn);
@@ -67,5 +81,6 @@ public class LibroRepositoryJPA implements LibroRepository {
 		t.commit();
 
 	}
+
 
 }
