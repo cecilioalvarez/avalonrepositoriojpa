@@ -12,8 +12,6 @@ import es.avalon.repositorios.jpa.LibroRepositoryJPA;
 
 public class LibroRepositoryJPATest {
 
-	
-	
 	public LibroRepositoryJPATest() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -21,53 +19,37 @@ public class LibroRepositoryJPATest {
 
 	@Test
 	public void test_buscar_todos() {
-	
-		LibroRepository mirepositorio= new LibroRepositoryJPA();	
-		assertThat(mirepositorio.buscarTodos().size(),greaterThanOrEqualTo(4));
-		
+
+		LibroRepository mirepositorio = new LibroRepositoryJPA();
+		assertThat(mirepositorio.buscarTodos().size(), greaterThanOrEqualTo(4));
+
 	}
-	
+
 	@Test
 	public void test_buscar_por_isbn() {
-	
-		LibroRepository mirepositorio= new LibroRepositoryJPA();	
-		Libro libro= mirepositorio.buscarPorISBN("1AB");
-		assertEquals("1AB", libro.getIsbn());
-		assertEquals("Java", libro.getTitulo());
-		assertEquals("cecilio", libro.getAutor());
-		
-		
-		
-		
+
+		LibroRepository mirepositorio = new LibroRepositoryJPA();
+		Libro libro = mirepositorio.buscarPorISBN("2AC");
+		assertEquals("2AC", libro.getIsbn());
+
 	}
-	
+
 	@Test
 	public void test_buscar_por_titulo() {
-	
-		LibroRepository mirepositorio= new LibroRepositoryJPA();	
-		Libro libro= mirepositorio.buscarPorTitulo("Java");
-		assertEquals("1AB", libro.getIsbn());
-		assertEquals("Java", libro.getTitulo());
-		assertEquals("cecilio", libro.getAutor());
-		
-		
-		
-		
+
+		LibroRepository mirepositorio = new LibroRepositoryJPA();
+		Libro libro = mirepositorio.buscarPorTitulo("2AC");
+		assertEquals("html", libro.getTitulo());
+
 	}
-	
+
 	@Test
 	public void test_borrar_libro() {
-	
-		
-		LibroRepository mirepositorio= new LibroRepositoryJPA();	
-		Libro libro=new Libro("1AB");
+
+		LibroRepository mirepositorio = new LibroRepositoryJPA();
+		Libro libro = new Libro("1AB");
 		mirepositorio.borrar(libro);
-		
-		
-		
-		
-		
-		
+
 	}
 
 }

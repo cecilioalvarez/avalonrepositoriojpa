@@ -18,4 +18,8 @@ public interface LibroRepository {
 
 	void borrar(Libro libro);
 
+	List<Libro> ordenarPorTitulo();
+	
+	List<Libro> ordenarPorPrecio();
+
 }
