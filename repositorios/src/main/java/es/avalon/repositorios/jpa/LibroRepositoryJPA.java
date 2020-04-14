@@ -64,5 +64,4 @@ public class LibroRepositoryJPA implements LibroRepository {
 		et.commit();
 	}
 
-
 }
