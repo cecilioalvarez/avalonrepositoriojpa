@@ -1,5 +1,6 @@
 package es.avalon.repositorios.jpa;
 
+
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -18,15 +19,13 @@ public class LibroRepositoryJPA implements LibroRepository {
 	
 	public LibroRepositoryJPA() {
 		
-		emf=Persistence.createEntityManagerFactory("UnidadBiblioteca");
+		emf = EMFSingleton.getInstance();
 		em=emf.createEntityManager();
 	}
 
 	@Override
 	public List<Libro> buscarTodos() {
 
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("UnidadBiblioteca");
-		EntityManager em = emf.createEntityManager();
 		TypedQuery<Libro> consulta = em.createQuery("select l from Libro l", Libro.class);
 
 		List<Libro> lista = consulta.getResultList();
@@ -36,8 +35,6 @@ public class LibroRepositoryJPA implements LibroRepository {
 
 	@Override
 	public Libro buscarPorISBN(String isbn) {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("UnidadBiblioteca");
-		EntityManager em = emf.createEntityManager();
 
 		return em.find(Libro.class, isbn);
 	}
@@ -45,8 +42,6 @@ public class LibroRepositoryJPA implements LibroRepository {
 	@Override
 	public Libro buscarPorTitulo(String titulo) {
 		
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("UnidadBiblioteca");
-		EntityManager em = emf.createEntityManager();
 		TypedQuery<Libro> consulta = em.createQuery("select l from Libro l where l.titulo=:titulo", Libro.class);
 		consulta.setParameter("titulo", titulo);
 		Libro libro = consulta.getSingleResult();
@@ -80,10 +75,30 @@ public class LibroRepositoryJPA implements LibroRepository {
 		EntityTransaction et=em.getTransaction();
 		et.begin();
 		Libro libroBorrar=em.merge(libro);
-		em.remove(libro);
+		em.remove(libroBorrar);
 		et.commit();
 
 
+	}
+	
+	@Override
+	public List<Libro> ordenarTitulo() {
+
+		TypedQuery<Libro> consulta = em.createQuery("select l from Libro as l order by l.titulo", Libro.class);
+
+		List<Libro> lista = (consulta.getResultList());
+
+		return lista;
+	}
+	
+	@Override
+	public List<Libro> ordenarAutor() {
+		
+		TypedQuery<Libro> consulta = em.createQuery("select l from Libro as l order by l.autor", Libro.class);
+		
+		List<Libro> lista = (consulta.getResultList());
+		
+		return lista;
 	}
 
 }
