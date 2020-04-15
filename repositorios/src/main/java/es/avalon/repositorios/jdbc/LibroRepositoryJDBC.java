@@ -23,7 +23,7 @@ public class LibroRepositoryJDBC implements LibroRepository {
 		String consulta = "select * from Libros";
 
 		// genero una lista de libros para trabajar de una forma natural
-		// con programaciÃ³n orientada a objeto
+		// con programación orientada a objeto
 		List<Libro> lista = new LinkedList<Libro>();
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -39,7 +39,7 @@ public class LibroRepositoryJDBC implements LibroRepository {
 
 				Libro libro = new Libro(rs.getString("isbn"), rs.getString("titulo"), rs.getString("autor"),
 						rs.getInt("precio"));
-				// aÃ±ado cada libro a la lista
+				// añado cada libro a la lista
 				lista.add(libro);
 			}
 
