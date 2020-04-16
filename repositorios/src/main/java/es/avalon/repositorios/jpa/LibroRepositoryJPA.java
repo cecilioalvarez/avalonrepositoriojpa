@@ -14,6 +14,7 @@ import es.avalon.repositorios.LibroRepository;
 public class LibroRepositoryJPA implements LibroRepository {
 
 	EntityManagerFactory emf;
+	// dependemos de un entitymanager
 	EntityManager em;
 
 	public LibroRepositoryJPA() {
