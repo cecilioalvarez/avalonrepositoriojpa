@@ -18,7 +18,7 @@ public class LibroRepositoryJPA implements LibroRepository {
 
 	public LibroRepositoryJPA() {
 
-		emf = Persistence.createEntityManagerFactory("UnidadBiblioteca");
+		emf = EMFSingleton.getInstance();
 		em=emf.createEntityManager();
 	}
 	
