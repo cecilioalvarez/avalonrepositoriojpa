@@ -12,13 +12,13 @@ import es.avalon.dominio.Libro;
 import es.avalon.repositorios.LibroRepository;
 
 public class LibroRepositoryJPA implements LibroRepository {
-
-	EntityManagerFactory emf;
+	
+	//Dependemos de un entity manager
 	EntityManager em;
 	
 	public LibroRepositoryJPA() {
-		emf=EMFSingleton.getInstance();
-		em=emf.createEntityManager();
+
+		em=EMFSingleton.getInstance().createEntityManager();
 	}
 	
 	public List<Libro> buscarTodos() {
