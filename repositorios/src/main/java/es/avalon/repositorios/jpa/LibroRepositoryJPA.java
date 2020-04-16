@@ -8,6 +8,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import es.avalon.dominio.Libro;
 import es.avalon.repositorios.LibroRepository;
@@ -49,7 +50,8 @@ public class LibroRepositoryJPA implements LibroRepository {
 		consulta.setParameter("titulo", titulo);		
 		return consulta.getSingleResult();
 	}
-
+	
+	@Transactional
 	public void insertar(Libro libro) {
 
 		EntityTransaction t=em.getTransaction();
@@ -59,6 +61,7 @@ public class LibroRepositoryJPA implements LibroRepository {
 		
 	}
 
+	@Transactional
 	public void salvar(Libro libro) {
 		
 		EntityTransaction t=em.getTransaction();
@@ -68,6 +71,7 @@ public class LibroRepositoryJPA implements LibroRepository {
 
 	}
 
+	@Transactional
 	public void borrar(Libro libro) {
 	
 		EntityTransaction t=em.getTransaction();
