@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import es.avalon.dominio.Libro;
@@ -13,16 +14,11 @@ import es.avalon.repositorios.LibroRepository;
 
 public class LibroRepositoryJPA implements LibroRepository {
 
-	EntityManagerFactory emf;
-	// dependemos de un entitymanager
+	@PersistenceContext
 	EntityManager em;
 
-	public LibroRepositoryJPA() {
-
-		emf = EMFSingleton.getInstance();
-		em=emf.createEntityManager();
-	}
 	
+	@Override
 	public List<Libro> buscarTodos() {
 
 		TypedQuery<Libro> consulta = em.createQuery("select l from Libro l", Libro.class);
