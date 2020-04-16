@@ -18,7 +18,7 @@ public class LibroRepositoryJPA implements LibroRepository {
 
 	public LibroRepositoryJPA() {
 
-		emf = Persistence.createEntityManagerFactory("UnidadBiblioteca");
+		emf = EMFSingleton.getInstance();
 		em=emf.createEntityManager();
 	}
 	
@@ -26,6 +26,17 @@ public class LibroRepositoryJPA implements LibroRepository {
 
 		TypedQuery<Libro> consulta = em.createQuery("select l from Libro l", Libro.class);
 		return consulta.getResultList();		
+	}
+	@Override
+	public List<Libro> buscarTodosOrdenadosPorTitulo() {
+		
+		TypedQuery<Libro> consulta = em.createQuery("select l from Libro l order by l.titulo", Libro.class);
+		return consulta.getResultList();	
+	}
+	@Override
+	public List<Libro> buscarTodosOrdenadosPorAutor() {
+		TypedQuery<Libro> consulta = em.createQuery("select l from Libro l order by l.autor", Libro.class);
+		return consulta.getResultList();	
 	}
 
 	public Libro buscarPorISBN(String isbn) {
@@ -63,5 +74,7 @@ public class LibroRepositoryJPA implements LibroRepository {
 		em.remove(libroBorrar);
 		et.commit();
 	}
+
+
 
 }

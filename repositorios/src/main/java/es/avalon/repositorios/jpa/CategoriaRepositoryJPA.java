@@ -15,7 +15,7 @@ public class CategoriaRepositoryJPA implements CategoriaRepository{
 
 	public CategoriaRepositoryJPA() {
 
-		emf = Persistence.createEntityManagerFactory("UnidadBiblioteca");
+		emf = EMFSingleton.getInstance();
 		em=emf.createEntityManager();
 	}
 	

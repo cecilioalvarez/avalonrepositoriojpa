@@ -7,6 +7,8 @@ import es.avalon.dominio.Libro;
 public interface LibroRepository {
 
 	List<Libro> buscarTodos();
+	List<Libro> buscarTodosOrdenadosPorTitulo();
+	List<Libro> buscarTodosOrdenadosPorAutor();
 
 	Libro buscarPorISBN(String isbn);
 
