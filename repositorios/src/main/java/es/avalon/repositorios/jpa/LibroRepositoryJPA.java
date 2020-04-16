@@ -6,21 +6,20 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import es.avalon.dominio.Libro;
 import es.avalon.repositorios.LibroRepository;
-
+@Repository
 public class LibroRepositoryJPA implements LibroRepository {
 
-	EntityManagerFactory emf;
-	EntityManager em;
+	@PersistenceContext
+	EntityManager em=null;
 
-	public LibroRepositoryJPA() {
-
-		emf = EMFSingleton.getInstance();
-		em=emf.createEntityManager();
-	}
 	
 	public List<Libro> buscarTodos() {
 
@@ -49,14 +48,14 @@ public class LibroRepositoryJPA implements LibroRepository {
 		consulta.setParameter("titulo", titulo);
 		return consulta.getSingleResult();
 	}
-	
+	@Transactional
 	public void insertar(Libro libro) {
 		EntityTransaction et = em.getTransaction();
 		et.begin();
 		em.persist(libro);
 		et.commit();
 	}
-	
+	@Transactional
 	public void salvar(Libro libro) {
 		
 		EntityTransaction et = em.getTransaction();
@@ -65,7 +64,7 @@ public class LibroRepositoryJPA implements LibroRepository {
 		et.commit();
 
 	}
-	
+	@Transactional
 	public void borrar(Libro libro) {
 
 		EntityTransaction et = em.getTransaction();
