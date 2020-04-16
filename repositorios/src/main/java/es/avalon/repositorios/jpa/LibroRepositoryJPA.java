@@ -9,9 +9,12 @@ import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
+import org.springframework.stereotype.Repository;
+
 import es.avalon.dominio.Libro;
 import es.avalon.repositorios.LibroRepository;
 
+@Repository
 public class LibroRepositoryJPA implements LibroRepository {
 
 	@PersistenceContext

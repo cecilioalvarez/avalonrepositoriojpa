@@ -5,9 +5,12 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 
+import org.springframework.stereotype.Repository;
+
 import es.avalon.dominio.Categoria;
 import es.avalon.repositorios.CategoriaRepository;
 
+@Repository
 public class CategoriaRepositoryJPA implements CategoriaRepository{
 
 
