@@ -54,32 +54,21 @@ public class LibroRepositoryJPA implements LibroRepository {
 	@Transactional
 	public void insertar(Libro libro) {
 
-		EntityTransaction t=em.getTransaction();
-		t.begin();	
-		em.persist(libro);
-		t.commit();
-		
+		em.persist(libro);		
 	}
 
 	@Transactional
 	public void salvar(Libro libro) {
-		
-		EntityTransaction t=em.getTransaction();
-		t.begin();	
-		em.merge(libro);
-		t.commit();
 
+		em.merge(libro);
 	}
 
 	@Transactional
 	public void borrar(Libro libro) {
 	
-		EntityTransaction t=em.getTransaction();
-		t.begin();
 		//Libro libroBorrar=em.find(Libro.class,libro.getIsbn());
 		Libro libroBorrar=em.merge(libro);
 		em.remove(libroBorrar);
-		t.commit();
 
 	}
 
