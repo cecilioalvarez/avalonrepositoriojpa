@@ -7,6 +7,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
+import javax.transaction.Transactional;
 
 import es.avalon.dominio.Libro;
 import es.avalon.repositorios.LibroRepository;
@@ -39,10 +40,12 @@ public class LibroRepositoryJPA implements LibroRepository {
 		return consulta.getResultList();	
 	}
 
+	@Transactional
 	public Libro buscarPorISBN(String isbn) {
 		 return em.find(Libro.class, isbn);
 	}
 	
+	@Transactional
 	public Libro buscarPorTitulo(String titulo) {
 
 		TypedQuery<Libro> consulta = em.createQuery("select l from Libro l where l.titulo=:titulo", Libro.class);
@@ -50,31 +53,25 @@ public class LibroRepositoryJPA implements LibroRepository {
 		return consulta.getSingleResult();
 	}
 	
+	@Transactional
 	public void insertar(Libro libro) {
-		EntityTransaction et = em.getTransaction();
-		et.begin();
+		
 		em.persist(libro);
-		et.commit();
 	}
 	
+	@Transactional
 	public void salvar(Libro libro) {
 		
-		EntityTransaction et = em.getTransaction();
-		et.begin();
 		em.merge(libro);
-		et.commit();
 
 	}
 	
+	@Transactional
 	public void borrar(Libro libro) {
 
-		EntityTransaction et = em.getTransaction();
-		et.begin();
 		Libro libroBorrar = em.merge(libro);
 		em.remove(libroBorrar);
-		et.commit();
+		
 	}
-
-
 
 }
